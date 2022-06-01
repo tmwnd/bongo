@@ -1,0 +1,17 @@
+.inline {
+    display: inline;
+}
+
+details>*>input,
+details>*>*>input {
+    width: 20em;
+}
+
+details>summary {
+    padding-bottom: 0.25em;
+}
+
+details>div.padding {
+    padding-top: 0.25em;
+    padding-left: 1.04em;
+}

@@ -10,10 +10,31 @@
     <link rel="stylesheet" href="stylesheets/index.css">
 
     <script src="./javascripts/mustache/mustache.js"></script>
+    <script src="./javascripts/index.js"></script>
 </head>
 
 <body>
+    <form action="./gui" method="post">
+        <details>
+            <summary>
+                <div class="inline">
+                    <input type="text" id="input_wld" name="wld" placeholder="wld">
+                </div>
 
+                <div class="inline">
+                    <button type="submit" id="button_submit">submit</button>
+                </div>
+            </summary>
+
+            <div class="inline padding">
+                <input type="text" id="input_old_wld" name="old_wld" placeholder="old_wld">
+            </div>
+
+            <div class="inline">
+                <button id="button_swap">⥮</button>
+            </div>
+        </details>
+    </form>
 </body>
 
 </html>
