@@ -9,4 +9,4 @@ gui_route.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', gui_route)
 
-app.listen(3000)
+app.listen((__dirname.includes('beta.bongo')) ? 3001 : 3000)
