@@ -1,0 +1,23 @@
+{
+  "name": "bongo.tmwnd.de",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmwnd/bongo.git"
+  },
+  "author": "tmwnd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmwnd/bongo/issues"
+  },
+  "homepage": "https://github.com/tmwnd/bongo#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mustache": "^4.2.0"
+  }
+}
