@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bongo</title>
 
-    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
 
-    <script src="./javascripts/mustache/mustache.js"></script>
-    <script src="./javascripts/index.js"></script>
+    <script src="/javascripts/mustache/mustache.js"></script>
+    <script src="/javascripts/index.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,9 @@
         <details>
             <summary>
                 <div class="inline">
-                    <input type="text" id="input_wld" name="wld" placeholder="wld">
+                    <input type="text" id="input_wld" name="wld" value="{{wld}}"
+                        placeholder="https://haste.bongo.best/*.txt" pattern="https://haste.bongo.best/[\w]{10}.txt"
+                        required>
                 </div>
 
                 <div class="inline">
@@ -27,7 +29,8 @@
             </summary>
 
             <div class="inline padding">
-                <input type="text" id="input_old_wld" name="old_wld" placeholder="old_wld">
+                <input type="text" id="input_old_wld" name="old_wld" placeholder="https://haste.bongo.best/*.txt (old)"
+                    pattern="https://haste.bongo.best/[\w]{10}.txt">
             </div>
 
             <div class="inline">

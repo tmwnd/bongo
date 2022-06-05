@@ -17,14 +17,13 @@ app.use('/api', require('./middlewares/api.js'))
 /* routes */
 app.use('/gui', require('./routes/gui.js'))
 
-app.use('/javascripts/mustache', express.static(path.join(__dirname, 'node_modules/mustache')))
+app.use(require('./routes/index.js'))
 app.use(express.static(path.join(__dirname, 'public')))
 
 /* rest */
+app.use('/javascripts/mustache', express.static(path.join(__dirname, 'node_modules/mustache')))
+
 const api = express.Router()
-
-api.use('/cookie', require('./rest/cookies.js'))
-
 app.use('/api', api)
 
 app.listen((__dirname.includes('beta.bongo')) ? 3001 : 3000)
