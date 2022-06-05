@@ -6,12 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade GUI</title>
+
+    <link rel="stylesheet" href="/stylesheets/gui.css">
+
+    <script src="/javascripts/gui.js"></script>
 </head>
 
 <body>
-    {{wld}}
+    {{wld}} - {{title}}
 
-    <div id="wld"></div>
+    <div class="series_outer">
+        {{{series}}}
+    </div>
+
+    <button id="btn_trade">trade</button>
 </body>
 
 </html>

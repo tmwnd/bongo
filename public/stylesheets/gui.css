@@ -1,0 +1,33 @@
+#btn_trade {
+    margin-top: 1vh;
+    height: 9vh;
+    width: 100%;
+}
+
+.series_outer {
+    margin-top: 1vh;
+    height: 85vh;
+    overflow-y: auto;
+}
+
+.series {
+    width: 100%;
+}
+
+.waifus_outer {
+    margin-bottom: 1em;
+    height: max-content;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.waifus_inner {
+    height: 1.5em;
+    width: max-content;
+}
+
+.waifu {
+    margin-top: 0.25em;
+    height: 1.5em;
+    width: max-content;
+}

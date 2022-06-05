@@ -15,9 +15,9 @@ app.use('/gui', require('./middlewares/wld.js'))
 app.use('/api', require('./middlewares/api.js'))
 
 /* routes */
+app.use(require('./routes/index.js'))
 app.use('/gui', require('./routes/gui.js'))
 
-app.use(require('./routes/index.js'))
 app.use(express.static(path.join(__dirname, 'public')))
 
 /* rest */
