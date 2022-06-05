@@ -4,6 +4,10 @@
     width: 100%;
 }
 
+.checked {
+    background-color: green;
+}
+
 .series_outer {
     margin-top: 1vh;
     height: 85vh;
@@ -22,12 +26,13 @@
 }
 
 .waifus_inner {
-    height: 1.5em;
+    height: 1.75em;
     width: max-content;
 }
 
 .waifu {
     margin-top: 0.25em;
+    margin-bottom: 0.25em;
     height: 1.5em;
     width: max-content;
 }
