@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 app.engine('html', consolidate.mustache)
+app.set('views', __dirname + '/views');
 
 /* middlewares */
 app.use(express.urlencoded({ extended: true }))
