@@ -1,8 +1,16 @@
 const express = require('express')
-const Mustache = require('mustache')
+const request = require('request')
 
-let wld_valid = (wld) => wld.match(/https:\/\/haste.bongo.best\/[\w]{10}\.txt/)
-let render_gui = (res, wld) => res.render('./../views/gui.html', { 'wld': wld })
+wld_root_url = 'https://haste.bongo.best/raw/'
+
+function render_gui(res, wld) {
+    let wld_id = wld.slice(wld.lastIndexOf('/') + 1).replace('.txt', '')
+    request(wld_root_url + wld_id, {}, response => {
+        console.log(response)
+    })
+
+    res.render('./../views/gui.html', { 'wld': wld })
+}
 
 module.exports = express.Router()
     .get('/', (req, res) => render_gui(res, req.query.wld))

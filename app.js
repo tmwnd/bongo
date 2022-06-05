@@ -11,7 +11,7 @@ app.engine('html', consolidate.mustache)
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-app.use('/gui', require('./middlewares/wld_cookie.js'))
+app.use('/gui', require('./middlewares/wld.js'))
 app.use('/api', require('./middlewares/api.js'))
 
 /* routes */

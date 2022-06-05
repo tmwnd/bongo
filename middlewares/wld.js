@@ -1,6 +1,11 @@
 const express = require('express')
 
-let set_wld_cookie = (wld, res, next) => {
+let wld_valid = (wld) => wld.match(/https:\/\/haste.bongo.best\/[\w]{10}\.txt/)
+
+function set_wld_cookie(wld, res, next) {
+    if (!wld_valid(wld || ''))
+        return res.redirect('./')
+
     res.cookie('wld', wld)
     next()
 }
