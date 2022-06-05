@@ -9,11 +9,16 @@
 
     <link rel="stylesheet" href="/stylesheets/gui.css">
 
+    <script src="/javascripts/mustache/mustache.js"></script>
     <script src="/javascripts/gui.js"></script>
 </head>
 
 <body>
-    {{wld}} - {{title}}
+    <div>{{wld}} - {{title}}</div>
+
+    <div class="popup">
+        <div class="popup_value" id="waifu_popup"></div>
+    </div>
 
     <div class="series_outer">
         {{{series}}}
