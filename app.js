@@ -1,6 +1,7 @@
 const path = require('path')
 
 const express = require('express')
+const bodyParser = require('body-parser')
 const consolidate = require('consolidate')
 const cookieParser = require('cookie-parser')
 
@@ -9,6 +10,7 @@ app.engine('html', consolidate.mustache)
 app.set('views', __dirname + '/views');
 
 /* middlewares */
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
@@ -25,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/javascripts/mustache', express.static(path.join(__dirname, 'node_modules/mustache')))
 
 const api = express.Router()
+
+api.use(require('./rest/waifu.js'))
+
 app.use('/api', api)
 
 app.listen((__dirname.includes('beta.bongo')) ? 3001 : 3000)

@@ -4,10 +4,10 @@ const mysql = require('mysql');
 class db {
     static instance = new db();
 
-    sql;
+    sql
 
     constructor() {
-        if (this.db != null)
+        if (this.instance != null)
             return;
 
         Promise.resolve()
@@ -29,7 +29,7 @@ class db {
 
     connect() { this.sql.connect() }
 
-    query(qry, val = [], callback = console.log) {
+    query(qry, val = [], callback) {
         this.resolve()
             .then(sql => sql.query(qry, val, (err, result) => callback(new Promise((resolve, reject) => {
                 if (err)
@@ -45,7 +45,7 @@ class db {
             }))))
     }
 
-    nonquery(qry, val = [], callback = console.log) {
+    nonquery(qry, val = [], callback) {
         this.resolve()
             .then(sql => sql.query(qry, val, err => callback(new Promise((resolve, reject) => {
                 if (err)

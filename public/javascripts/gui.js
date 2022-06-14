@@ -1,6 +1,8 @@
 const HOLD_TIME = 250;
 const POPUP_TPL = fetch("/templates/partials/waifu_popup.html").then(file => file.text())
 
+const API_URL = "https://beta.bongo.tmwnd.de/api/"
+
 function toggle_check(event) {
     let class_list = event.target.classList
 
@@ -52,7 +54,7 @@ async function waifu_popup(event) {
     let tpl = await POPUP_TPL
 
     let popup = document.getElementById('waifu_popup')
-    let waifu = event
+    let name = event
         .target
         .textContent
     let series = event
@@ -62,19 +64,28 @@ async function waifu_popup(event) {
         .parentElement
         .getElementsByClassName('series')[0]
         .textContent
-    popup.innerHTML = Mustache.render(tpl, {
-        'img_url': 'https://bot.to/wp-content/uploads/2020/09/bongo_5f70261889b78.png',
-        'name': waifu,
-        'series': series
-    })
 
-    if (!popup.classList.contains('show'))
-        popup.classList.add('show')
+    series = series.substring(0, series.lastIndexOf('(') - 1)
 
-    document.getElementById('btn_popup').addEventListener('click', event => {
-        if (popup.classList.contains('show'))
-            popup.classList.remove('show')
-    })
+    fetch(API_URL + "img?name=" + name)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            if (response)
+                return response
+            else
+                Promise.reject()
+        })
+        .then(response => {
+            popup.innerHTML = Mustache.render(tpl, {
+                'img_url': response.image,
+                'name': name,
+                'series': series
+            })
+
+            popup.classList.add('show')
+        })
+        .catch(err => console.log(`waifu ${name} not found`))
 }
 
 function set_series_listener() {
@@ -96,7 +107,8 @@ function set_series_listener() {
                 if (timeout_id != 0) {
                     clearTimeout(timeout_id)
                     toggle_check(event)
-                }
+                } else
+                    document.getElementById('waifu_popup').classList.remove('show')
             })
         })
     })
@@ -107,7 +119,8 @@ function set_trade_listener() {
         let trade = ''
         Array.from(document.getElementsByClassName('series')).forEach(series => {
             if (series.classList.contains('checked'))
-                trade += `, s ${series.textContent}`
+
+                trade += `, s ${series.textContent.substring(0, series.textContent.lastIndexOf('(') - 1)}`
             else {
                 Array.from(series
                     .parentElement

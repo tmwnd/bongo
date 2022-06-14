@@ -77,18 +77,6 @@
     visibility: visible;
 }
 
-.grid {
-    margin-left: 5%;
-    margin-right: 5%;
-    display: grid;
-    grid-template-columns: 75% 25%;
-}
-
-.grid>div>table {
+table {
     text-align: left;
-}
-
-.grid>div>button {
-    height: 100%;
-    width: 100%;
 }
