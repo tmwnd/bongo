@@ -1,7 +1,7 @@
 const HOLD_TIME = 250;
 const POPUP_TPL = fetch("/templates/partials/waifu_popup.html").then(file => file.text())
 
-const API_URL = "https://beta.bongo.tmwnd.de/api/"
+const API_URL = "https://bongo.tmwnd.de/api/"
 
 function toggle_check(event) {
     let class_list = event.target.classList
@@ -70,18 +70,14 @@ async function waifu_popup(event) {
     fetch(API_URL + "img?name=" + name)
         .then(response => response.json())
         .then(response => {
-            console.log(response)
             if (response)
                 return response
             else
                 Promise.reject()
         })
-        .then(response => {
-            popup.innerHTML = Mustache.render(tpl, {
-                'img_url': response.image,
-                'name': name,
-                'series': series
-            })
+        .then(waifu => {
+            waifu.series = series
+            popup.innerHTML = Mustache.render(tpl, waifu)
 
             popup.classList.add('show')
         })
