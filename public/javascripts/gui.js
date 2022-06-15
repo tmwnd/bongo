@@ -130,6 +130,69 @@ function set_series_listener() {
     })
 }
 
+function match(str1, str2) {
+    if (str1.toLowerCase().includes(str2.toLowerCase()))
+        return true
+
+    return false
+}
+
+function filter(series, filter) {
+    if (match(series.textContent, filter))
+        return true
+
+    let ret = false
+    Array
+        .from(series
+            .parentElement
+            .getElementsByClassName('waifus_outer')[0]
+            .getElementsByClassName('waifus_inner')[0]
+            .children)
+        .forEach(waifu => {
+            if (match(waifu.textContent, filter)) {
+                ret = true
+                return true
+            }
+        })
+
+    return ret
+}
+
+function set_filter_listener() {
+    document.getElementById('input_filter').addEventListener('input', event => {
+        Array.from(document.getElementsByClassName('series'))
+            .forEach(series => {
+                if (filter(series, event.target.value))
+                    series.parentElement.classList.remove('filtered')
+                else
+                    series.parentElement.classList.add('filtered')
+            })
+    })
+
+    document.getElementById('ckb_complete').addEventListener('click', event => {
+        if (event.target.checked)
+            Array.from(document.getElementsByClassName('series'))
+                .filter(series => {
+                    series = series.textContent
+                    series = series.substring(series.lastIndexOf('(') + 1)
+                    series = series.slice(0, -1).split('/')
+
+                    return series[0] != series[1]
+                })
+                .forEach(series => series.parentElement.classList.add('complete'));
+        else
+            Array.from(document.getElementsByClassName('series'))
+                .filter(series => {
+                    series = series.textContent
+                    series = series.substring(series.lastIndexOf('(') + 1)
+                    series = series.slice(0, -1).split('/')
+
+                    return series[0] != series[1]
+                })
+                .forEach(series => series.parentElement.classList.remove('complete'));
+    })
+}
+
 function set_trade_listener() {
     document.getElementById('btn_trade').addEventListener('click', event => {
         let trade = ''
@@ -155,4 +218,5 @@ function set_trade_listener() {
 
 fetch('/')
     .then(set_series_listener)
+    .then(set_filter_listener)
     .then(set_trade_listener)

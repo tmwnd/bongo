@@ -46,6 +46,12 @@
     background-color: green;
 }
 
+.filtered,
+.complete {
+    visibility: hidden;
+    max-height: 0;
+}
+
 #waifu_info>img {
     margin-top: 1vh;
     display: block;
@@ -59,8 +65,20 @@ table {
     text-align: left;
 }
 
-#btn_trade {
+#div_controls {
     margin-top: auto;
+}
+
+#div_controls>* {
+    margin-top: 0.5em;
+}
+
+#btn_analysis {
+    height: 3vh;
+    width: 100%;
+}
+
+#btn_trade {
     height: 9vh;
     width: 100%;
 }
