@@ -28,7 +28,7 @@ app.use('/javascripts/mustache', express.static(path.join(__dirname, 'node_modul
 
 const api = express.Router()
 
-api.use(require('./rest/waifu.js'))
+api.use(require('./rest/anime.js'))
 
 app.use('/api', api)
 

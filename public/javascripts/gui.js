@@ -1,7 +1,8 @@
 const HOLD_TIME = 250;
-const POPUP_TPL = fetch("/templates/partials/waifu_popup.html").then(file => file.text())
+const WAIFU_INFO_TPL = fetch("/templates/partials/waifu_info.html").then(file => file.text())
+const WAIFU_ATTRIBUTE_TPL = fetch("templates/partials/waifu_attribute.html").then(file => file.text())
 
-const API_URL = "https://bongo.tmwnd.de/api/"
+const API_URL = "/api/"
 
 function toggle_check(event) {
     let class_list = event.target.classList
@@ -16,9 +17,9 @@ function toggle_check(event) {
             .getElementsByClassName('waifus_inner')[0]
             .children
         ).forEach(waifu => {
-            if (class_list.contains('checked') && !waifu.classList.contains('checked'))
+            if (class_list.contains('checked'))
                 waifu.classList.add('checked')
-            else if (!class_list.contains('checked') && waifu.classList.contains('checked'))
+            else if (!class_list.contains('checked'))
                 waifu.classList.remove('checked')
         })
     } else if (class_list.contains('waifu')) {
@@ -30,8 +31,7 @@ function toggle_check(event) {
             .getElementsByClassName('series')[0]
 
         if (!class_list.contains('checked')) {
-            if (series.classList.contains('checked'))
-                series.classList.remove('checked')
+            series.classList.remove('checked')
         } else {
             let all = true
             Array.from(event
@@ -43,17 +43,17 @@ function toggle_check(event) {
                 if (!all) return
             })
 
-            if (all && !series.classList.contains('checked')) {
+            if (all) {
                 series.classList.add('checked')
             }
         }
     }
 }
 
-async function waifu_popup(event) {
-    let tpl = await POPUP_TPL
+async function waifu_info(event) {
+    let [info_tpl, attribute_tpl] = await Promise.all([WAIFU_INFO_TPL, WAIFU_ATTRIBUTE_TPL])
 
-    let popup = document.getElementById('waifu_popup')
+    let info = document.getElementById('waifu_info')
     let name = event
         .target
         .textContent
@@ -67,7 +67,16 @@ async function waifu_popup(event) {
 
     series = series.substring(0, series.lastIndexOf('(') - 1)
 
-    fetch(API_URL + "img?name=" + name)
+    fetch(API_URL + 'waifu', {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'name': name,
+            'series': series
+        })
+    })
         .then(response => response.json())
         .then(response => {
             if (response)
@@ -77,9 +86,21 @@ async function waifu_popup(event) {
         })
         .then(waifu => {
             waifu.series = series
-            popup.innerHTML = Mustache.render(tpl, waifu)
 
-            popup.classList.add('show')
+            let keys = []
+            let attributes = ''
+            for (let key in waifu)
+                keys.push(key)
+            keys
+                .filter(key => !['image', 'media', 'description'].includes(key))
+                .filter(key => waifu[key])
+                .forEach(key => attributes += Mustache.render(attribute_tpl, {
+                    'key': key, 'value': waifu[key]
+                }))
+
+            info.innerHTML = Mustache.render(info_tpl, {
+                'image': waifu.image, 'attributes': attributes
+            })
         })
         .catch(err => console.log(`waifu ${name} not found`))
 }
@@ -97,14 +118,13 @@ function set_series_listener() {
             // waifu.addEventListener('click', toggle_check)
             waifu.addEventListener('mousedown', event => timeout_id = setTimeout(() => {
                 timeout_id = 0
-                waifu_popup(event)
+                waifu_info(event)
             }, HOLD_TIME))
             waifu.addEventListener('mouseup', event => {
                 if (timeout_id != 0) {
                     clearTimeout(timeout_id)
                     toggle_check(event)
-                } else
-                    document.getElementById('waifu_popup').classList.remove('show')
+                }
             })
         })
     })
