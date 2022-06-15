@@ -149,7 +149,7 @@ function set_trade_listener() {
                 })
             }
         })
-        console.log('b.trade' + trade.substring(1))
+        navigator.clipboard.writeText('b.trade' + trade.substring(1))
     })
 }
 
