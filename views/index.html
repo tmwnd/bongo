@@ -8,36 +8,33 @@
     <title>Bongo</title>
 
     <link rel="stylesheet" href="/stylesheets/index.css">
-
-    <script src="/javascripts/mustache/mustache.js"></script>
-    <script src="/javascripts/index.js"></script>
 </head>
 
 <body>
-    <form action="./gui" method="post">
-        <details>
-            <summary>
-                <div class="inline">
-                    <input type="text" id="input_wld" name="wld" value="{{wld}}"
-                        placeholder="https://haste.bongo.best/*.txt" pattern="https://haste.bongo.best/[\w]{10}.txt"
-                        required>
-                </div>
+    <div id="bongo">
+        <div class="header">trade</div>
 
-                <div class="inline">
-                    <button type="submit" id="button_submit">submit</button>
-                </div>
-            </summary>
+        <form action="./trade" method="post">
+            <input type="text" id="input_wld" class="inline" name="wld" value="{{wld}}"
+                placeholder="https://haste.bongo.best/*.txt" pattern="https://haste.bongo.best/[\w]{10}.txt" required>
 
-            <div class="inline padding">
-                <input type="text" id="input_old_wld" name="old_wld" placeholder="https://haste.bongo.best/*.txt (old)"
-                    pattern="https://haste.bongo.best/[\w]{10}.txt">
-            </div>
+            <button type="submit" id="button_submit" class="inline">trade</button>
+        </form>
 
-            <div class="inline">
-                <button id="button_swap">⥮</button>
-            </div>
-        </details>
-    </form>
+        <div class="header">compare</div>
+
+        <form action="./compare" method="post">
+            <input type="text" id="input_wld" class="inline" name="new_wld" placeholder="https://haste.bongo.best/*.txt"
+                pattern="https://haste.bongo.best/[\w]{10}.txt" required>
+
+            <button type="submit" id="button_submit" class="inline">compare</button>
+
+            <br>
+
+            <input type="text" id="input_wld" class="inline" name="old_wld" value="{{wld}}"
+                placeholder="https://haste.bongo.best/[\w]{10}.txt" required>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,28 @@
+.grid {
+    display: grid;
+    width: 99.125%;
+    grid-template-columns: 49.5% 49.5%;
+    column-gap: 1%;
+}
+
+.trade_container {
+    margin-top: 0.25vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
+.trade {
+    width: 100%;
+}
+
+.empty_series {
+    visibility: hidden;
+}
+
+.series_outer {
+    margin-top: 1vh;
+    height: 90vh;
+    width: 100%;
+    overflow-y: auto;
+}

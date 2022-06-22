@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare</title>
+
+    <link rel="stylesheet" href="/stylesheets/series.css">
+    <link rel="stylesheet" href="/stylesheets/compare.css">
+
+    <script src="/javascripts/compare.js"></script>
+</head>
+
+<body>
+    <div class="grid">
+        <div>
+            <div>{{old_title}}</div>
+            <div>{{old_wld}}</div>
+
+            <div class="trade_container">
+                <button class="trade">trade (old)</button>
+            </div>
+        </div>
+
+        <div>
+            <div>{{new_title}}</div>
+            <div>{{new_wld}}</div>
+
+            <div class="trade_container">
+                <button class="trade">trade (new)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid series_outer">
+        <div id="old_series">
+            {{{old_series}}}
+        </div>
+
+        <div id="new_series">
+            {{{new_series}}}
+        </div>
+    </div>
+</body>
+
+</html>

@@ -14,12 +14,13 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-app.use('/gui', require('./middlewares/wld.js'))
+app.use('/trade', require('./middlewares/wld_cookie.js'))
 app.use('/api', require('./middlewares/api.js'))
 
 /* routes */
 app.use(require('./routes/index.js'))
-app.use('/gui', require('./routes/gui.js'))
+app.use('/trade', require('./routes/trade.js'))
+app.use('/compare', require('./routes/compare.js'))
 
 app.use(express.static(path.join(__dirname, 'public')))
 

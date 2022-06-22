@@ -48,6 +48,17 @@ function toggle_check(event) {
             }
         }
     }
+
+    let checked_count = Array.from(
+        document.getElementsByClassName('checked')
+    )
+        .filter(element => element.classList.contains('waifu'))
+        .length
+
+    if (checked_count == 0)
+        document.getElementById('btn_trade').textContent = 'trade'
+    else
+        document.getElementById('btn_trade').textContent = `trade (${checked_count})`
 }
 
 async function waifu_info(event) {
@@ -198,7 +209,6 @@ function set_trade_listener() {
         let trade = ''
         Array.from(document.getElementsByClassName('series')).forEach(series => {
             if (series.classList.contains('checked'))
-
                 trade += `, s ${series.textContent.substring(0, series.textContent.lastIndexOf('(') - 1)}`
             else {
                 Array.from(series
@@ -216,7 +226,8 @@ function set_trade_listener() {
     })
 }
 
-fetch('/')
-    .then(set_series_listener)
-    .then(set_filter_listener)
-    .then(set_trade_listener)
+window.onload = () => {
+    set_series_listener()
+    set_filter_listener()
+    set_trade_listener()
+}

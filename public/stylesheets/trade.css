@@ -1,8 +1,8 @@
 .grid {
     display: grid;
     height: 100%;
-    width: 100%;
-    column-gap: 0.5em;
+    width: 97.5%;
+    column-gap: 1.25%;
 }
 
 .grid.h {
@@ -17,29 +17,6 @@
     margin-top: 1vh;
     height: 90vh;
     overflow-y: auto;
-}
-
-.series {
-    width: 100%;
-}
-
-.waifus_outer {
-    margin-bottom: 1em;
-    height: max-content;
-    width: 100%;
-    overflow-x: auto;
-}
-
-.waifus_inner {
-    height: 1.75em;
-    width: max-content;
-}
-
-.waifu {
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    height: 1.5em;
-    width: max-content;
 }
 
 .checked {
